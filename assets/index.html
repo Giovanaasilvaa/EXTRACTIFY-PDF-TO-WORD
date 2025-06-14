@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css">
+  <title>Extractify</title>
+</head>
+<body>
+  <header class="site-header">
+    <h1>Extractify</h1>
+  </header>
+<div class="container-all">
+<div class="container-left">
+
+  <!-- Lado esquerdo - Vídeo de demonstração -->
+  <div class="left">
+    <video autoplay loop muted playsinline>
+      <source src="videos/pdf.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+    <hr>
+     <h1><strong>Extraia o Texto do seu PDF</strong></h1>
+     <p><strong>100% automático e rápido</strong></p>
+  </div>
+
+  </div>
+
+
+  <!-- Lado direito - Upload + Resultado -->
+  <div class="container-right">
+  <div class="right">
+   
+    <div id="drop-area">
+      <input type="file" id="fileElem" accept="application/pdf" />
+      <button class="upload-btn">Faça Upload</button>
+      <p><strong>ou arraste um documento PDF</strong></p>
+      <small>O dowload começara após o upload</small>
+      <p id="resultado"></p>
+    </div>
+  </div>
+</div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
