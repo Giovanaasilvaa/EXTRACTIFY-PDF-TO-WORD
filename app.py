@@ -1,3 +1,5 @@
+import webbrowser
+from threading import Timer
 from flask import Flask, request, send_file, send_from_directory, make_response
 from flask_cors import CORS
 import pdfplumber
@@ -8,41 +10,43 @@ import os
 app = Flask(__name__, static_folder='assets')
 CORS(app)
 
-# Rota principal: carrega o index.html
+# Main route: serve the index.html file
 @app.route('/', methods=['GET'])
 def index():
     return send_from_directory(app.static_folder, 'index.html')
 
-# Upload e conversão do PDF para Word (.docx)
+# Upload and convert PDF to Word (.docx)
 @app.route('/upload', methods=['POST'])
 def upload_pdf():
+    # Check if PDF file was sent
     if 'pdf' not in request.files:
-        return "Arquivo PDF não enviado.", 400
+        return "PDF file not uploaded.", 400
 
     pdf_file = request.files['pdf']
 
     try:
-        texto_completo = ""
+        full_text = ""
+        # Open PDF using pdfplumber and extract text from all pages
         with pdfplumber.open(pdf_file.stream) as pdf:
-            for pagina in pdf.pages:
-                texto = pagina.extract_text()
-                if texto:
-                    texto_completo += texto + "\n"
+            for page in pdf.pages:
+                text = page.extract_text()
+                if text:
+                    full_text += text + "\n"
         
-        # Criar documento Word
+        # Create a Word document and add the extracted text
         doc = Document()
-        doc.add_paragraph(texto_completo)
+        doc.add_paragraph(full_text)
 
-        # Salvar o Word fisicamente na pasta /upload
+        # Save the Word document physically in the /upload folder
         output_path = os.path.join('upload', 'saida.docx')
         doc.save(output_path)
 
-        # Salvar o Word em memória
+        # Load the saved Word document into memory
         with open(output_path, 'rb') as f:
             doc_stream = io.BytesIO(f.read())
             doc_stream.seek(0)
 
-        # Enviar como download
+        # Send the Word document as a downloadable file response
         response = make_response(send_file(
             doc_stream,
             as_attachment=True,
@@ -53,27 +57,30 @@ def upload_pdf():
         return response
 
     except Exception as e:
-        return f"Erro ao processar o PDF: {str(e)}", 500
+        # Handle exceptions and return error message
+        return f"Error processing PDF: {str(e)}", 500
 
-# Rota para servir arquivos estáticos da pasta assets
+# Route to serve static files from the assets folder
 @app.route('/<path:filename>')
 def serve_static(filename):
     return send_from_directory(app.static_folder, filename)
 
-# Rota para CSS (se tiver pasta css dentro de assets)
+# Route to serve CSS files if there is a css folder inside assets
 @app.route('/css/<path:filename>')
 def serve_css(filename):
     return send_from_directory(os.path.join(app.static_folder, 'css'), filename)
 
-# Rota para JS (se tiver pasta js dentro de assets)
+# Route to serve JS files if there is a js folder inside assets
 @app.route('/js/<path:filename>')
 def serve_js(filename):
     return send_from_directory(os.path.join(app.static_folder, 'js'), filename)
 
-# Opcional: Rota pro favicon (se quiser criar depois)
+# Optional: Route for favicon (if you want to add later)
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(app.static_folder, 'favicon.ico')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Automatically open the browser after 1 second and run the app
+    Timer(1, lambda: webbrowser.open('http://127.0.0.1:5000/')).start()
+    app.run()
