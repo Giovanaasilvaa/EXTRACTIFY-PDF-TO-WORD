@@ -1,15 +1,14 @@
-
 <h1 align="center">📄 EXTRACTIFY - PDF TO WORD (PYTHON & FLASK)</h1>
 
-<p align="center"><em>Converta PDFs em arquivos Word de forma rápida, simples e automática</em></p>
+<p align="center"><em>Convert PDFs to Word files quickly, simply, and automatically</em></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/último%20commit-junho-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/last%20commit-june-blue?style=flat-square" />
   <img src="https://img.shields.io/badge/python-100%25-3776AB?style=flat-square&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/tecnologias-4-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/technologies-4-blue?style=flat-square" />
 </p>
 
-<h3 align="center">Tecnologias e ferramentas utilizadas:</h3>
+<h3 align="center">Technologies and Tools Used:</h3>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
@@ -20,48 +19,48 @@
 
 ---
 
-## 📋 Sobre o Projeto
+## 📋 About the Project
 
-O **Extractify** é uma aplicação web desenvolvida com **Python (Flask)** que permite ao usuário fazer o **upload de um arquivo PDF** e **converter automaticamente o conteúdo para um arquivo Word (.docx)**.
+**Extractify** is a web application developed with **Python (Flask)** that allows the user to **upload a PDF file** and **automatically convert the content to a Word (.docx) file**.
 
-Essa ferramenta realiza a **extração de texto de documentos PDF** usando a biblioteca **pdfplumber** e a **geração de arquivos Word** com a biblioteca **python-docx**.
+This tool performs **text extraction from PDF documents** using the **pdfplumber** library and **Word file generation** with the **python-docx** library.
 
-> ⚠️ *O sistema faz apenas extração de texto simples. Layouts mais complexos, como tabelas ou imagens, podem não ser preservados.*
+> ⚠️ *The system only performs simple text extraction. More complex layouts, such as tables or images, may not be preserved.*
 
 ---
 
-## 🧠 Funcionalidades
+## 🧠 Features
 
-✅ Upload de arquivos PDF através de drag & drop ou botão  
-✅ Extração automática de texto do PDF  
-✅ Geração e download imediato do arquivo Word (.docx)  
-✅ Feedback de progresso (mensagem de status)  
-✅ Interface web leve e responsiva
+✅ Upload PDF files via drag & drop or button. <br>
+✅ Automatic text extraction from PDF. <br>
+✅ Instant generation and download of Word file (.docx). <br>
+✅ Progress feedback (status message). <br>
+✅ Lightweight and responsive web interface.
 
 ---
 
 ## 🛠 Estrutura do Projeto
 
 <pre>
-/app.py → Backend Flask responsável pelas rotas e lógica de conversão
-/assets → Arquivos estáticos como HTML, CSS, JS e vídeos
-/assets/css → Estilo visual da página
-/assets/js → Scripts JavaScript de interação (upload, drag & drop, etc)
-/assets/videos → Vídeo de demonstração exibido na página
+/app.py → Flask backend responsible for routes and conversion logic
+/assets → Static files such as HTML, CSS, JS and videos
+/assets/css → Visual style of the page
+/assets/js → JavaScript interaction scripts (upload, drag & drop, etc.)
+/assets/videos → Demo video displayed on the page
 </pre>
 
 ---
 
-## 🚀 Como Executar o Projeto
+## 🚀 How to Run the Project
 
-1. **Clone este repositório:**
+1. **Clone this repository:**
 
 ```bash
 git clone https://github.com/seu-usuario/seu-repositorio.git
 cd seu-repositorio
 ```
 
-2. **Crie e ative um ambiente virtual (opcional, mas recomendado):**
+2. **Create and activate a virtual environment (optional, but recommended):**
 
 ```bash
 python -m venv venv
@@ -69,19 +68,19 @@ venv\Scripts\activate   # Windows
 source venv/bin/activate  # Linux/macOS
 ```
 
-3. **Instale as dependências:**
+3. **Install dependencies:**
 
 ```bash
 pip install flask flask_cors pdfplumber python-docx
 ```
 
-4. **Execute o servidor Flask:**
+4. **Run the Flask server:**
 
 ```bash
 python app.py
 ```
 
-5. **Acesse no navegador:**
+5. **Access in browser:**
 
 ```
 http://localhost:5000
@@ -89,34 +88,34 @@ http://localhost:5000
 
 ---
 
-## 📂 Exemplo de Uso
+## 📂 Usage Example
 
-✅ Faça upload de um arquivo PDF  
-✅ O sistema irá processar  
-✅ O download do Word começará automaticamente
-
----
-
-## ⚠️ Limitações
-
-- Não mantém formatação de layout (somente texto simples)
-- Arquivos PDF muito grandes podem demorar mais
+✅ Upload a PDF file <br>
+✅ The system will process <br>
+✅ The Word download will start automatically
 
 ---
 
-## 📦 Versão
+## ⚠️ Limitations
+
+- Does not maintain layout formatting (only plain text) <br>
+- Very large PDF files may take longer
+
+---
+
+## 📦 Version
 
 1.0.0
 
 ---
 
-## 📄 Licença
+## 📄 License
 
-Este projeto está sob a licença MIT.
+This project is licensed under the MIT License.
 
 ---
 
-## 📬 Contato
+## 📬 Contact
 
 Giovana Marques Silva  
 giovanamarquessilva24@gmail.com
