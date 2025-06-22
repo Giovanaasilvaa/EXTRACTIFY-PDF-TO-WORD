@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/last%20commit-june-blue?style=flat-square" />
-  <img src="https://img.shields.io/badge/python-100%25-3776AB?style=flat-square&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/python-26.7%25-3776AB?style=flat-square&logo=python&logoColor=white" />
   <img src="https://img.shields.io/badge/technologies-4-blue?style=flat-square" />
 </p>
 
