@@ -1,25 +1,25 @@
 const dropArea = document.getElementById('drop-area');
 const fileElem = document.getElementById('fileElem');
 const resultado = document.getElementById('resultado');
-const uploadBtn = document.querySelector('.upload-btn');  // novo: botão upload
+const uploadBtn = document.querySelector('.upload-btn');  // new: upload button
 
-// Ao clicar na área de drop, abrir seletor de arquivo
+// When clicking on the drop area, open the file selector
 dropArea.addEventListener('click', () => fileElem.click());
 
-// Ao clicar no botão "Faça Upload", também abre seletor de arquivo
+// When clicking the "Upload" button, also open the file selector
 uploadBtn.addEventListener('click', (e) => {
-  e.preventDefault(); // evita qualquer comportamento padrão
+  e.preventDefault(); // prevent default behavior
   fileElem.click();
 });
 
-// Quando o arquivo for selecionado via seletor, envia o arquivo
+// When a file is selected via the file selector, send the file
 fileElem.addEventListener('change', (e) => {
   if (fileElem.files.length) {
-    enviarArquivo(fileElem.files[0]);
+    sendFile(fileElem.files[0]);
   }
 });
 
-// Eventos para drag and drop
+// Events for drag and drop
 dropArea.addEventListener('dragover', (e) => {
   e.preventDefault();
   dropArea.classList.add('dragover');
@@ -35,16 +35,16 @@ dropArea.addEventListener('drop', (e) => {
   if (e.dataTransfer.files.length) {
     const file = e.dataTransfer.files[0];
     if(file.type === "application/pdf"){
-      enviarArquivo(file);
+      sendFile(file);
     } else {
-      alert("Por favor, envie um arquivo PDF.");
+      alert("Please upload a PDF file.");
     }
   }
 });
 
-// Função para enviar arquivo ao backend e iniciar download
-function enviarArquivo(file) {
-  resultado.textContent = "Extraindo texto e gerando arquivo Word...";
+// Function to send file to backend and start download
+function sendFile(file) {
+  resultado.textContent = "Extracting text and generating Word file...";
 
   const formData = new FormData();
   formData.append('pdf', file);
@@ -55,7 +55,7 @@ function enviarArquivo(file) {
   })
   .then(response => {
     if (!response.ok) {
-      throw new Error("Erro no servidor");
+      throw new Error("Server error");
     }
     return response.blob();
   })
@@ -67,10 +67,11 @@ function enviarArquivo(file) {
     document.body.appendChild(a);
     a.click();
     a.remove();
-    resultado.textContent = "Download concluído!";
+    resultado.textContent = "Download complete!";
   })
   .catch(err => {
-    resultado.textContent = "Erro ao processar o arquivo.";
+    resultado.textContent = "Error processing the file.";
     console.error(err);
   });
 }
+
