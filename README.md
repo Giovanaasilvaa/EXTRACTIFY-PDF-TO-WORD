@@ -53,20 +53,9 @@ This tool performs **text extraction from PDF documents** using the **pdfplumber
 
 ## 🚀 How to Run the Project
 
-1. **Clone this repository:**
-
-```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
-```
+1. **Clone this repository**
 
 2. **Create and activate a virtual environment (optional, but recommended):**
-
-```bash
-python -m venv venv
-venv\Scripts\activate   # Windows
-source venv/bin/activate  # Linux/macOS
-```
 
 3. **Install dependencies:**
 
