@@ -10,6 +10,9 @@ import os
 app = Flask(__name__, static_folder='assets')
 CORS(app)
 
+
+os.makedirs('upload', exist_ok=True)
+
 # Main route: serve the index.html file
 @app.route('/', methods=['GET'])
 def index():
@@ -23,6 +26,7 @@ def upload_pdf():
         return "PDF file not uploaded.", 400
 
     pdf_file = request.files['pdf']
+    output_path = os.path.join('upload', 'saida.docx')
 
     try:
         full_text = ""
@@ -36,46 +40,40 @@ def upload_pdf():
         # Create a Word document and add the extracted text
         doc = Document()
         doc.add_paragraph(full_text)
-
-        # Save the Word document physically in the /upload folder
-        output_path = os.path.join('upload', 'saida.docx')
         doc.save(output_path)
-
-        # Load the saved Word document into memory
-        with open(output_path, 'rb') as f:
-            doc_stream = io.BytesIO(f.read())
-            doc_stream.seek(0)
 
         # Send the Word document as a downloadable file response
         response = make_response(send_file(
-            doc_stream,
+            output_path,
             as_attachment=True,
             download_name='saida.docx',
             mimetype='application/vnd.openxmlformats-officedocument.wordprocessingml.document'
         ))
 
+        # Ensure the temporary file is deleted after sending
+        response.call_on_close(lambda: os.remove(output_path))
         return response
 
     except Exception as e:
         # Handle exceptions and return error message
         return f"Error processing PDF: {str(e)}", 500
 
-# Route to serve static files from the assets folder
+# Route to serve static files
 @app.route('/<path:filename>')
 def serve_static(filename):
     return send_from_directory(app.static_folder, filename)
 
-# Route to serve CSS files if there is a css folder inside assets
+# Route to serve CSS files
 @app.route('/css/<path:filename>')
 def serve_css(filename):
     return send_from_directory(os.path.join(app.static_folder, 'css'), filename)
 
-# Route to serve JS files if there is a js folder inside assets
+# Route to serve JS files 
 @app.route('/js/<path:filename>')
 def serve_js(filename):
     return send_from_directory(os.path.join(app.static_folder, 'js'), filename)
 
-# Optional: Route for favicon (if you want to add later)
+
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(app.static_folder, 'favicon.ico')
@@ -83,4 +81,4 @@ def favicon():
 if __name__ == '__main__':
     # Automatically open the browser after 1 second and run the app
     Timer(1, lambda: webbrowser.open('http://127.0.0.1:5000/')).start()
-    app.run()
+    app.run(debug=False, use_reloader=False)
