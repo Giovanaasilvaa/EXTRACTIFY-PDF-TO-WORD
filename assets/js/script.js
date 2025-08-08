@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } finally {
       isProcessing = false;
       uploadBtn.disabled = false;
+      fileElem.value = ''; 
     }
   }
 });
-
